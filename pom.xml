@@ -6,7 +6,6 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.homeproject</groupId>
 	<artifactId>restful-web-service</artifactId>
@@ -17,12 +16,21 @@
 	
 	<properties>
 		<java.version>11</java.version>
+ 		<start-class>com.homeproject.restfulwebservice.RestfulWebServiceApplication</start-class>
 	</properties>
 	
 	<dependencies>
 		<dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

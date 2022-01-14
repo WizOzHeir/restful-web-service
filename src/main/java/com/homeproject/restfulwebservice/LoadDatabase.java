@@ -22,6 +22,9 @@ class LoadDatabase {
     		  new UserModel("Toomas", 23, "toomas@gmail.com", "Musta tee 2", "Estonia", "888999")));
       log.info("Preloading " + repository.save(
     		  new UserModel("Kirsi", 10, "kiirsi@gmail.com", "Musta tee 2", "Estonia", "333444")));
+      log.info("Preloading " + repository.save(
+    		  new UserModel("Karl", 11, "karl@gmail.com", "Kadaka tee 2", "Estonia", "777444")));
+      
     };
   }
 }

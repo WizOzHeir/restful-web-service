@@ -53,7 +53,7 @@ const UsersList = () => {
   };
 
   const findByName = () => {
-    UserService.findByUserName(searchName)
+    UserService.findByName(searchName)
       .then(response => {
         setUsers(response.data);
         console.log(response.data);

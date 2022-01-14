@@ -25,7 +25,7 @@ class UserDataService {
     return http.delete(`/users`);
   }
 
-  findByUserName(name) {
+  findByName(name) {
     return http.get(`/users?name=${name}`);
   }
 }
