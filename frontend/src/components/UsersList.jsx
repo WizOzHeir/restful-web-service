@@ -31,10 +31,17 @@ function UsersList(props){
 		});
 	};
   
-  	const onSubmitSearch = (e) => {
-		console.log("I am in progress.")
-		
-		e.prevent.default();
+  	const onSubmitSearch = async () => {
+		await setSetup({
+			method: UserApiMethods.GET,
+			config: {
+				params: {
+					name: query
+				}
+			}
+		});
+		setCurrentUser(null);
+		setCurrentIndex(-1);
   	};
   	
  	const renderSearch = () => {
@@ -83,7 +90,6 @@ function UsersList(props){
 	};
 	
 	const UserListWithAlert = withAlert(() => {
-		console.log(userList)
 		if(!userList.length) {
 			return (
 				<div>Sorry. There is no users at this moment.</div>

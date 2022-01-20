@@ -9,5 +9,5 @@ import com.homeproject.restfulwebservice.model.UserModel;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "api")
 public interface UserRepository extends JpaRepository<UserModel, Long> {
-  List<UserModel> findByName(String name);
+  List<UserModel> findByNameStartingWithIgnoreCase(String name);
 }

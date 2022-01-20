@@ -36,7 +36,7 @@ public class UserController {
 			if (name == null)
 				userRepository.findAll().forEach(users::add);
 			else
-				userRepository.findByName(name).forEach(users::add);
+				userRepository.findByNameStartingWithIgnoreCase(name).forEach(users::add);
 
 			if (users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);

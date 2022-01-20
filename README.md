@@ -37,9 +37,11 @@ $ npm start
 Project is: _in progress_ 
 
 ## Room for Improvement
-- add sort filter, pagination in UsersList
-- add validation in AddUser
-- add 404 page
+- add filters, pagination on UsersList page
+- add button GenerateUser on AddUser page
+- add button Restore on UserPage page
+- ~~add validation in AddUser~~
+- ~~add 404 page~~
 - add general exception handler
 - build in Docker
 - unit tests
