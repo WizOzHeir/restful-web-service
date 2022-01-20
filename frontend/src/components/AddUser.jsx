@@ -1,143 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 
-import UserService from "../services/UserService";
+import { UseUserApi, UserApiMethods } from "../services/useUserApi";
+import withAlert from "../utility/withAlert";
+import SmartUserForm from "./SmartUserForm";
 
-const AddUser = () => {
-  const initialState = {
-    id: null,
-    name: "",
-    age: 0,
-    email: "",
-    address: "",
-    country: "",
-    telephone: ""
-  };
-  const [user, setUser] = useState(initialState);
-  const [submitted, setSubmitted] = useState(false);
+const FormWithAlert = withAlert(SmartUserForm);
 
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-  };
-
-  const saveUser = () => {
-    var data = {
-	    title: user.name,
-	    age: user.age,
-		email: user.email,
-		address: user.address,
-		country: user.country,
-		telephone: user.telephone     
-    };
-
-    UserService.create(data)
-      .then(response => {
-        setUser({
-		    title: response.data.name,
-		    age: response.data.age,
-			email: response.data.email,
-			address: response.data.address,
-			country: response.data.country,
-			telephone: response.data.telephone   
-        });
-        setSubmitted(true);
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const newUser = () => {
-    setUser(initialState);
-    setSubmitted(false);
-  };
-
-  return (
-    <div className="submit-form">
-      {submitted ? (
-        <div>
-          <h4>Successfully created!</h4>
-          <button className="btn btn-success" onClick={newUser}>
-            Add
-          </button>
-        </div>
-      ) : (
-        <div>
-          <div className="form-group">
-            <label htmlFor="title">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={user.name}
-              onChange={handleInputChange}
-              name="name"
-            />
-          </div>
-            <div className="form-group">
-              <label htmlFor="age">Age</label>
-              <input
-                type="number"
-                className="form-control"
-                id="age"
-                name="age"
-                value={user.age}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                value={user.email}
-                onChange={handleInputChange}
-              />
-            </div>
-             <div className="form-group">
-              <label htmlFor="address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="address"
-                name="address"
-                value={user.address}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="country">Country</label>
-              <input
-                type="text"
-                className="form-control"
-                id="country"
-                name="country"
-                value={user.country}
-                onChange={handleInputChange}
-              />
-            </div>
-             <div className="form-group">
-              <label htmlFor="telephone">Telephone</label>
-              <input
-                type="tel"
-                className="form-control"
-                id="telephone"
-                name="telephone"
-                value={user.telephone}
-                onChange={handleInputChange}
-              />
-            </div>          
-
-          <button onClick={saveUser} className="btn btn-success">
-            Submit
-          </button>
-        </div>
-      )}
-    </div>
+function AddUser(props){
+	const labels = ["Name", "Age", "Email", "Address", "Country", "Telephone"];
+	
+  	const [{ data, isLoading, isError }, setSetup] = UseUserApi();
+  	
+  	const onSubmit = (userData) => {
+		setSetup({
+			method: UserApiMethods.POST,
+			config: {
+				data: userData
+			}
+		});
+		props.history.push({
+			pathname: "/success",
+			state: { detail: "User is created." }
+		});
+	}
+	
+	const onCancel = () => {
+		props.history.push({
+			pathname: "/",
+		});
+	};
+		
+	// GENERATE user
+	
+	
+	return (
+    <div className="submit-form p-5 col-md-6">  
+    	<FormWithAlert
+    		dafaultValues={null}
+    		labels={labels}
+    		onSubmit={onSubmit}
+    		isLoading={isLoading}
+    		isError={isError}
+    	>
+	        <div className="form-group">
+	          <button type="submit" className="btn btn-primary">
+	            Add user
+	          </button>
+	          <button
+	            type="button"
+	            onClick={onCancel}
+	            className="btn btn-secondary float-right"
+	          >
+	            Cancel
+	          </button>
+	        </div>
+    	</FormWithAlert>  
+      </div>
   );
 };
 

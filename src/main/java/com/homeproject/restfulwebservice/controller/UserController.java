@@ -33,7 +33,6 @@ public class UserController {
 	public ResponseEntity<List<UserModel>> getAllUsers(@RequestParam(required = false) String name) {
 		try {
 			List<UserModel> users = new ArrayList<UserModel>();
-
 			if (name == null)
 				userRepository.findAll().forEach(users::add);
 			else
