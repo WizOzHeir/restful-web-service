@@ -42,6 +42,8 @@ Project is: _in progress_
 - add button Restore on UserPage page
 - ~~add validation in AddUser~~
 - ~~add 404 page~~
-- add general exception handler
-- build in Docker
-- unit tests
+- add additional error boundaries and StrictMode
+- change withLoading to @addLoader (child components no use Loader) 
+- build in Docker; build&run app with one command
+- basic unit tests for API points
+- add static type checking using PropTypes library
